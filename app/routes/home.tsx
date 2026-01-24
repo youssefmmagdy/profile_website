@@ -47,53 +47,138 @@ const ExternalLinkIcon = () => (
 
 // Data
 const technicalSkills = [
-  "LLMs", "Neural Networks", "Transfer Learning", "CNNs", "Fine-tuning", "Embedding",
-  "Test Driven Development (TDD)", "Git & GitHub", "Linux", "OOP", "RESTful APIs", "Agile", "SCRUM", "Jira"
+  "LLMs", "Neural Networks", "Transfer Learning", "Convolutional NNs", "Transformer", "Fine-tuning", "Embedding",
+  "Test Driven Development (TDD)", "Git & GitHub", "Linux", "Bash", "OOP", "RESTful APIs", "Agile", "SCRUM", "Jira"
 ];
 
 const projects = [
+  
   {
     title: "Face-Detector",
     description: "A real-time face detection and tracking system built with YOLOv3-face, capable of detecting and capturing distinct faces from images, videos, or live webcam feeds.",
     tools: ["Python", "OpenCV", "Face_Recognition", "PyQt5"],
-    github: "https://github.com/YoussefMagdy"
+    github: "https://github.com/youssefmmagdy/Face-Detector"
   },
   {
     title: "E-Commerce Sentiment Analysis | Knowledge Graph | Graph-RAG-Chatbot",
     description: "Intelligent E-Commerce Search powered by Knowledge Graphs + Large Language Models.",
     tools: ["Streamlit", "Python", "Neo4j Knowledge Graph", "LangChain", "HuggingFace LLMs"],
-    github: "https://github.com/YoussefMagdy"
+    github: "https://github.com/youssefmmagdy/E-Commerce-Graph-RAG"
   },
   {
     title: "Harris-SIFT-Detectors",
     description: "A comprehensive analysis of corner detection and feature detection algorithms in computer vision, comparing Harris Corner Detector and SIFT techniques.",
     tools: ["Python"],
-    github: "https://github.com/YoussefMagdy"
+    github: "https://github.com/youssefmmagdy/Harris-SIFT-Detectors"
   },
   {
     title: "Lending-Club-Dataset-Data-Engineering",
     description: "An end-to-end data engineering and machine learning pipeline for predicting loan default status using historical LendingClub loan data (2007–2018).",
     tools: ["SBERT Embedding", "K-Means clustering", "Feature Engineering", "PowerBI"],
-    github: "https://github.com/YoussefMagdy"
+    github: "https://github.com/youssefmmagdy/Lending-Club-Dataset-Data-Engineering"
   },
   {
     title: "LangChain-RAG-Streamlit",
     description: "A RAG chatbot that allows users to upload a PDF and ask questions about its content.",
     tools: ["LangChain", "HuggingFace", "Streamlit", "FAISS"],
-    github: "https://github.com/YoussefMagdy"
+    github: "https://github.com/youssefmmagdy/LangChain-RAG-Streamlit"
   },
   {
     title: "EuroSAT TransferLearning Classification",
     description: "Land Use and Land Cover (LULC) classification using the EuroSAT RGB dataset. Compares a baseline CNN trained from scratch with transfer learning using EfficientNetB0.",
     tools: ["Transfer Learning", "TensorFlow", "CNN", "EfficientNetB0"],
-    github: "https://github.com/YoussefMagdy"
+    github: "https://github.com/youssefmmagdy/EuroSAT_TransferLearning_Classification"
+  },
+  {
+    title: "gpt2-124M-parameters",
+    description: "A PyTorch implementation of a GPT-2-style Transformer model, built from scratch by following the core ideas from the 'Attention is All You Need' paper.",
+    tools: ["Transformer Architecture", "Python", "LLM", "Deep Neural Networks", "Embedding", "PyTorch"],
+    github: "https://github.com/youssefmmagdy/gpt2-124M-parameters"
+  },
+  {
+    title: "Smart-Irrigation-Predictor Bachelor Project (DNN & RAG system)",
+    description: "A machine learning-powered web application that predicts Evapotranspiration (ET) using 15 years of historical and forecasted weather data. It offers intelligent irrigation recommendations tailored to location, crop, and soil type — supporting sustainable agriculture through data-driven decisions.",
+    tools: ["Deep Neural Networks", "Tensorflow", "RAG", "Vercel Frontend Deploy", "Render Backend Deploy", "API"],
+    github: "https://www.linkedin.com/posts/youssefmmagdy_machinelearning-deeplearning-smartirrigation-activity-7332354301714919424-Ivr2?utm_source=share&utm_medium=member_desktop&rcm=ACoAADwBd8EBNGc8dzxIODFo9W8Eoa0NM9QhTyI"
+  },
+  {
+    title: "Music-Generator-Model Deep Neural Network",
+    description: "A Deep Neural Network trained on irish.abc file that contains 817 songs and generates likely.",
+    tools: ["Deep Neural Networks", "Tensorflow"],
+    github: "https://github.com/youssefmmagdy/Music_Generator"
+  },
+  {
+    title: "AWS EC2 instances",
+    description: "We were downloading 60000 books to a website, so we had to rent instances (computers)",
+    tools: ["Linux", "AWS", "Bash"],
+    github: "https://github.com/youssefmmagdy"
+  },
+  {
+    title: "Names-Generator-Model Deep Neural Network",
+    description: "This project demonstrates the evolution of name generation using progressively more powerful neural network models that trained on 17000 names.",
+    tools: ["Deep Neural Networks", "PyTorch", "Embedding"],
+    github: "https://github.com/youssefmmagdy/Names-Generator-NN.git"
+  },
+  {
+    title: "Full-Stack-Website (Group projekt) with MERN-Stack",
+    description: "Teer Enta brings together personalized recommendations, seamless booking, and smart budgeting into one intuitive platform.",
+    tools: ["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind", "Agile", "SCRUM", "Jira", "Restful APIs"],
+    github: "https://www.linkedin.com/posts/youssefmmagdy_teerenta-travel-innovation-activity-7276371959221829634-l9Qc?rcm=ACoAADwBd8EBNGc8dzxIODFo9W8Eoa0NM9QhTyI"
+  },
+  {
+    title: "Charity web application",
+    description: "building a website that Grants people the ability to connect with non-profit organizations in a much easier form so that they can donate items needed to help people in need, and today we want to showcase that project with you all: Introducing “Sharelelkheir”, your platform that connects Donors to People in need like never before!",
+    tools: ["React", "Tailwind"],
+    github: "https://www.linkedin.com/posts/omar-elharridy-9a5462253_software-engineering-course-project-spring-ugcPost-7207402752178663424-5KUD?utm_source=share&utm_medium=member_desktop&rcm=ACoAADwBd8EBNGc8dzxIODFo9W8Eoa0NM9QhTyI"
+  },
+  {
+    title: "Implementation of Tomasulo-Algorithm",
+    description: "Implementing Tomasulo algorithm that manages how the sequential operations run efficiently, act like a compiler.",
+    tools: ["Java", "Javafx", "OOP"],
+    github: "https://github.com/youssefmmagdy/Tomasulo-Algorithm"
+  },
+  {
+    title: "Full Chess Game",
+    description: "A complete chess application with board representation, move validation, and game logic.",
+    tools: ["Python", "Game Development"],
+    github: "https://www.linkedin.com/posts/youssefmmagdy_%D8%A8%D8%B3%D9%85-%D8%A7%D9%84%D9%84%D9%87-%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86-%D8%A7%D9%84%D8%B1%D8%AD%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%B5%D9%84%D8%A7%D8%A9-%D9%88%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85-%D8%B9%D9%84%D9%8A-activity-7099719778818269184-9Qca?rcm=ACoAADwBd8EBNGc8dzxIODFo9W8Eoa0NM9QhTyI"
+  },
+  {
+    title: "Automatik PDF-Generator",
+    description: "Algorithm that takes an excel file that contains customer and generates PDF for every customer, used for Hotel am Borsigturm in Germany.",
+    tools: ["Python", "Test Driven Development (TDD)"],
+    github: "https://github.com/youssefmmagdy/Automated-PDF-Generator"
+  },
+  {
+    title: "Health system",
+    description: "Built Entity Relationship diagram of a hospital structure by using SQL and as frontend ASP.NET.",
+    tools: ["SQL", "ASP.NET"],
+    github: "https://github.com/youssefmmagdy"
+  },
+  {
+    title: "Fillet-O-Neumann Computer architecture",
+    description: "The Von Neumann architecture is a computer design where both program instructions and data are stored in the same memory unit, using the same pathways or bus system",
+    tools: ["C"],
+    github: "https://github.com/youssefmmagdy/Fillet-O-Neumann"
+  },
+  {
+    title: "Operating-System-Schedular",
+    description: "Scheduler manages the usage of resources between the different processes. Mutexes that ensure mutual exclusion over the critical resources. Scheduler that schedules the processes that we have in our system.",
+    tools: ["C"],
+    github: "https://github.com/youssefmmagdy/Operating-System-Schedular"
+  },
+  {
+    title: "islamic_classroom",
+    description: "Like Google classroom, made for a small school that teaches children about Islamic literature, that reminds the children’s parents for doing homework or attendance or posts and so on.",
+    tools: ["Flutter", "Firebase", "Supabase", "APIs"],
+    github: "https://github.com/youssefmmagdy"
   }
 ];
 
 const experiences = [
   {
     title: "Junior Teaching Assistant",
-    company: "German International University in Berlin",
+    company: "German University in Cairo",
     period: "Sep 2024 - Dec 2024",
     description: "Data Structures and Algorithms with Java - Helping and explaining to students in worksheets"
   },
@@ -101,7 +186,7 @@ const experiences = [
     title: "Software Developer Intern",
     company: "Hotel Am Borsigturm, Germany",
     period: "Oct 2023 - Nov 2023",
-    description: "Built Frontend website using HTML & Tailwind. Developed Automated-PDF-Generator"
+    description: "Built Frontend website using HTML & Tailwind  |  Developed Automated-PDF-Generator"
   },
   {
     title: "Technical Support Intern",
@@ -112,6 +197,16 @@ const experiences = [
 ];
 
 export default function Home() {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -120,11 +215,11 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <a href="#" className="text-xl font-bold text-gray-900">Youssef Magdy</a>
             <div className="hidden md:flex gap-8">
-              <a href="#about" className="nav-link">About</a>
-              <a href="#experience" className="nav-link">Experience</a>
-              <a href="#skills" className="nav-link">Skills</a>
-              <a href="#projects" className="nav-link">Projects</a>
-              <a href="#contact" className="nav-link">Contact</a>
+              <a href="#about" className="nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
+              <a href="#experience" className="nav-link" onClick={(e) => handleNavClick(e, '#experience')}>Experience</a>
+              <a href="#skills" className="nav-link" onClick={(e) => handleNavClick(e, '#skills')}>Skills</a>
+              <a href="#projects" className="nav-link" onClick={(e) => handleNavClick(e, '#projects')}>Projects</a>
+              <a href="#contact" className="nav-link" onClick={(e) => handleNavClick(e, '#contact')}>Contact</a>
             </div>
           </div>
         </div>
@@ -138,7 +233,7 @@ export default function Home() {
               <h1 className="text-5xl font-bold text-gray-900 mb-4">
                 Youssef Magdy
               </h1>
-              <p className="text-2xl text-blue-600 font-medium mb-6">
+              <p className="text-2xl text-red-700 font-medium mb-6">
                 Software Engineer & AI Enthusiast
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
@@ -149,20 +244,26 @@ export default function Home() {
               <div className="flex gap-4">
                 <a
                   href="#contact"
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  className="px-6 py-3 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 transition-colors"
+                  onClick={(e) => handleNavClick(e, '#contact')}
                 >
                   Get in Touch
                 </a>
                 <a
                   href="#projects"
-                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-600 hover:text-blue-600 transition-colors"
+                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-red-700 hover:text-red-700 transition-colors"
+                  onClick={(e) => handleNavClick(e, '#projects')}
                 >
                   View Projects
                 </a>
               </div>
             </div>
-            <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white text-6xl md:text-8xl font-bold shadow-2xl">
-              YM
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
+              <img 
+                src="../../soora.jpg" 
+                alt="Youssef Magdy Profile Picture" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -180,7 +281,7 @@ export default function Home() {
                 <p className="text-gray-600 mt-2">Expected Graduation: 2026</p>
               </div>
               <div className="mt-4 md:mt-0">
-                <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-bold text-lg">
+                <span className="px-4 py-2 bg-red-100 text-red-800 rounded-full font-bold text-lg">
                   GPA: 1.46
                 </span>
               </div>
@@ -195,11 +296,11 @@ export default function Home() {
           <h2 className="section-title">Work Experience</h2>
           <div className="space-y-6">
             {experiences.map((exp, index) => (
-              <div key={index} className="card border-l-4 border-l-blue-600">
+              <div key={index} className="card border-l-4 border-l-red-700">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900">{exp.title}</h3>
-                    <p className="text-blue-600 font-medium">{exp.company}</p>
+                    <p className="text-red-700 font-medium">{exp.company}</p>
                     <p className="text-gray-600 mt-2">{exp.description}</p>
                   </div>
                   <span className="mt-2 md:mt-0 text-sm text-gray-500 font-medium whitespace-nowrap">
@@ -274,10 +375,10 @@ export default function Home() {
                   <EmailIcon />
                   <span>Youssefmmagdy55@gmail.com</span>
                 </a>
-                <a href="tel:+4917636535652" className="contact-link">
+                <div className="contact-link">
                   <PhoneIcon />
                   <span>+49 176 36535652</span>
-                </a>
+                </div>
                 <div className="contact-link">
                   <LocationIcon />
                   <span>Tegel, Berlin, Germany</span>
@@ -288,16 +389,16 @@ export default function Home() {
               <h3 className="text-lg font-semibold text-gray-900 mb-6">Connect With Me</h3>
               <div className="flex gap-4">
                 <a
-                  href="https://www.linkedin.com/in/youssefmagdy"
+                  href="https://www.linkedin.com/in/youssefmmagdy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
                 >
                   <LinkedInIcon />
                   <span>LinkedIn</span>
                 </a>
                 <a
-                  href="https://github.com/YoussefMagdy"
+                  href="https://github.com/youssefmmagdy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"

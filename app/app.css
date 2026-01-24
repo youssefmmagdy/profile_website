@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -11,12 +11,12 @@ html {
 
 body {
   @apply bg-white text-gray-900;
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Professional Section Styling */
 .section-title {
-  @apply text-2xl font-bold text-gray-800 border-b-2 border-blue-600 pb-2 mb-6;
+  @apply text-2xl font-bold text-gray-800 border-b-2 border-red-700 pb-2 mb-6;
 }
 
 .card {
@@ -24,17 +24,17 @@ body {
 }
 
 .skill-tag {
-  @apply px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200;
+  @apply px-3 py-1.5 bg-red-50 text-red-700 rounded-full text-sm font-medium border border-red-200;
 }
 
 .project-card {
-  @apply bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all duration-300;
+  @apply bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-xl hover:border-red-200 transition-all duration-300;
 }
 
 .nav-link {
-  @apply text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200;
+  @apply text-gray-600 hover:text-red-700 font-medium transition-colors duration-200;
 }
 
 .contact-link {
-  @apply flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-200;
+  @apply flex items-center gap-2 text-gray-600 hover:text-red-700 transition-colors duration-200;
 }
