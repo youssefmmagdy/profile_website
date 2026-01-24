@@ -236,6 +236,7 @@ export default function Home() {
               <p className="text-2xl text-red-700 font-medium mb-6">
                 Software Engineer & AI Enthusiast
               </p>
+              
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 Passionate software engineer specializing in AI, Machine Learning, and Full-Stack Development. 
                 Currently pursuing my degree at the German International University in Berlin with a GPA of 1.46. 
@@ -256,6 +257,14 @@ export default function Home() {
                 >
                   View Projects
                 </a>
+                <a
+                href="https://raw.githubusercontent.com/youssefmmagdy/profile_website/b4f81ad2edc35b57f5621ef1047de6a36e5c03b0/Youssef_Magdy_Resume.pdf"
+                // target="_blank"
+                // rel="noopener noreferrer"
+                className="inline-block text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors mt-3"
+              >
+                My Resume
+              </a>
               </div>
             </div>
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
