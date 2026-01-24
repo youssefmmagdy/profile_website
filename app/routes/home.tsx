@@ -260,7 +260,7 @@ export default function Home() {
             </div>
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
               <img 
-                src="public/soora.jpg" 
+                src="soora.jpg" 
                 alt="Youssef Magdy Profile Picture" 
                 className="w-full h-full object-cover"
               />
