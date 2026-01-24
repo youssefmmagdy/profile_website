@@ -2,7 +2,7 @@ import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Youssef Magdy | Software Engineer" },
+    { title: "Youssef Magdy" },
     { name: "description", content: "Professional portfolio of Youssef Magdy - Software Engineer specializing in AI, Machine Learning, and Full-Stack Development" },
   ];
 }
@@ -260,7 +260,7 @@ export default function Home() {
             </div>
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
               <img 
-                src="../../soora.jpg" 
+                src="public/soora.jpg" 
                 alt="Youssef Magdy Profile Picture" 
                 className="w-full h-full object-cover"
               />
@@ -277,7 +277,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div>
                 <h3 className="text-xl font-semibold text-gray-900">German International University in Berlin</h3>
-                <p className="text-blue-600 font-medium">Faculty of Media Engineering and Technology</p>
+                <p className="text-red-700 font-medium">Faculty of Media Engineering and Technology</p>
                 <p className="text-gray-600 mt-2">Expected Graduation: 2026</p>
               </div>
               <div className="mt-4 md:mt-0">
