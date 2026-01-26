@@ -1,5 +1,10 @@
 import type { Route } from "./+types/home";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -355,6 +360,170 @@ export default function Home() {
   const [language, setLanguage] = useState<'en' | 'de'>('en');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    // Hero section entrance animations
+    const heroTl = gsap.timeline();
+    heroTl
+      .fromTo(".hero-title", 
+        { opacity: 0, y: 50 }, 
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      )
+      .fromTo(".hero-subtitle", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4"
+      )
+      .fromTo(".hero-description", 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3"
+      )
+      .fromTo(".hero-buttons", 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3"
+      )
+      .fromTo(".hero-resume", 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2"
+      )
+      .fromTo(".hero-image", 
+        { opacity: 0, scale: 0.8 }, 
+        { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6"
+      );
+
+    // Section scroll animations
+    const sections = gsap.utils.toArray('.section-title');
+    sections.forEach((section: any) => {
+      gsap.fromTo(section, 
+        { opacity: 0, y: 30 }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.6, 
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    // Education card animation
+    gsap.fromTo(".education-card", 
+      { opacity: 0, y: 40 }, 
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.7, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".education-card",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Experience cards animation
+    const experienceCards = gsap.utils.toArray('.experience-card');
+    experienceCards.forEach((card: any, index: number) => {
+      gsap.fromTo(card, 
+        { opacity: 0, x: index % 2 === 0 ? -50 : 50 }, 
+        { 
+          opacity: 1, 
+          x: 0, 
+          duration: 0.6, 
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    // Skills animation with stagger
+    const skillTags = gsap.utils.toArray('.skill-tag');
+    gsap.fromTo(skillTags, 
+      { opacity: 0, scale: 0.8 }, 
+      { 
+        opacity: 1, 
+        scale: 1, 
+        duration: 0.4, 
+        ease: "back.out(1.7)",
+        stagger: 0.05,
+        scrollTrigger: {
+          trigger: ".skill-tag",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Project cards animation with stagger
+    const projectCards = gsap.utils.toArray('.project-card');
+    gsap.fromTo(projectCards, 
+      { opacity: 0, y: 50 }, 
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.6, 
+        ease: "power2.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".project-card",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Contact cards animation
+    const contactCards = gsap.utils.toArray('.contact-card');
+    contactCards.forEach((card: any, index: number) => {
+      gsap.fromTo(card, 
+        { opacity: 0, y: 30 }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.6, 
+          ease: "power2.out",
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    // Hover animations for project cards
+    projectCards.forEach((card: any) => {
+      const hoverTl = gsap.timeline({ paused: true });
+      hoverTl.to(card, { y: -10, duration: 0.3, ease: "power2.out" });
+      
+      card.addEventListener('mouseenter', () => hoverTl.play());
+      card.addEventListener('mouseleave', () => hoverTl.reverse());
+    });
+
+    // Hover animations for buttons
+    const buttons = gsap.utils.toArray('.hover-button');
+    buttons.forEach((button: any) => {
+      const hoverTl = gsap.timeline({ paused: true });
+      hoverTl.to(button, { scale: 1.05, duration: 0.2, ease: "power2.out" });
+      
+      button.addEventListener('mouseenter', () => hoverTl.play());
+      button.addEventListener('mouseleave', () => hoverTl.reverse());
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [language]); // Re-run animations when language changes
+
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'en' ? 'de' : 'en');
   };
@@ -466,27 +635,27 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 text-center md:text-left">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="hero-title text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 {t.hero.title}
               </h1>
-              <p className="text-xl sm:text-2xl text-red-700 font-medium mb-4 md:mb-6">
+              <p className="hero-subtitle text-xl sm:text-2xl text-red-700 font-medium mb-4 md:mb-6">
                 {t.hero.subtitle}
               </p>
               
-              <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
+              <p className="hero-description text-base sm:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
                 {t.hero.description}
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+              <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
                 <a
                   href="#contact"
-                  className="px-6 py-3 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 transition-colors text-center"
+                  className="hover-button px-6 py-3 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 transition-colors text-center"
                   onClick={(e) => handleNavClick(e, '#contact')}
                 >
                   {t.hero.getInTouch}
                 </a>
                 <a
                   href="#projects"
-                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-red-700 hover:text-red-700 transition-colors text-center"
+                  className="hover-button px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-red-700 hover:text-red-700 transition-colors text-center"
                   onClick={(e) => handleNavClick(e, '#projects')}
                 >
                   {t.hero.viewProjects}
@@ -496,12 +665,12 @@ export default function Home() {
                 href="https://raw.githubusercontent.com/youssefmmagdy/profile_website/b4f81ad2edc35b57f5621ef1047de6a36e5c03b0/Youssef_Magdy_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-4 px-6 py-2 text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors"
+                className="hero-resume inline-block mt-4 px-6 py-2 text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors"
               >
                 {t.hero.resume}
               </a>
             </div>
-            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden mt-8 md:mt-0">
+            <div className="hero-image w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden mt-8 md:mt-0">
               <img 
                 src="soora.jpg" 
                 alt="Youssef Magdy Profile Picture" 
@@ -516,7 +685,7 @@ export default function Home() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-title">{t.education.title}</h2>
-          <div className="card">
+          <div className="education-card card">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="mb-4 md:mb-0">
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{t.education.university}</h3>
@@ -539,7 +708,7 @@ export default function Home() {
           <h2 className="section-title">{t.experience.title}</h2>
           <div className="space-y-4 sm:space-y-6">
             {t.experience.experiences.map((exp, index) => (
-              <div key={index} className="card border-l-4 border-l-red-700">
+              <div key={index} className="experience-card card border-l-4 border-l-red-700">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                   <div className="mb-2 md:mb-0">
                     <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{exp.title}</h3>
@@ -625,7 +794,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <h2 className="section-title">{t.contact.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            <div className="card">
+            <div className="contact-card card">
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">{t.contact.contactInfo}</h3>
               <div className="space-y-3 sm:space-y-4">
                 <a href="mailto:Youssefmmagdy55@gmail.com" className="contact-link">
@@ -642,14 +811,14 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="card">
+            <div className="contact-card card">
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">{t.contact.connect}</h3>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
                   href="https://www.linkedin.com/in/youssefmmagdy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors text-sm sm:text-base"
+                  className="hover-button flex items-center justify-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors text-sm sm:text-base"
                 >
                   <LinkedInIcon />
                   <span>{t.contact.linkedin}</span>
@@ -658,7 +827,7 @@ export default function Home() {
                   href="https://github.com/youssefmmagdy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm sm:text-base"
+                  className="hover-button flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm sm:text-base"
                 >
                   <GitHubIcon />
                   <span>{t.contact.github}</span>
