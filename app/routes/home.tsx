@@ -361,6 +361,9 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Only run animations on the client side
+    if (typeof window === 'undefined') return;
+
     // Hero section entrance animations
     const heroTl = gsap.timeline();
     heroTl
