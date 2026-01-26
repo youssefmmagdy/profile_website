@@ -1,10 +1,9 @@
 import type { Route } from "./+types/home";
 import { useState, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// Dynamic import for GSAP to avoid SSR issues
+let gsap: any = null;
+let ScrollTrigger: any = null;
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -361,170 +360,181 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Only run animations on the client side
-    if (typeof window === 'undefined') return;
+    // Only run animations on the client side and when DOM is available
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
-    // Hero section entrance animations
-    const heroTl = gsap.timeline();
-    heroTl
-      .fromTo(".hero-title", 
-        { opacity: 0, y: 50 }, 
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
-      )
-      .fromTo(".hero-subtitle", 
-        { opacity: 0, y: 30 }, 
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4"
-      )
-      .fromTo(".hero-description", 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3"
-      )
-      .fromTo(".hero-buttons", 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3"
-      )
-      .fromTo(".hero-resume", 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2"
-      )
-      .fromTo(".hero-image", 
-        { opacity: 0, scale: 0.8 }, 
-        { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6"
-      );
+    // Dynamically import GSAP on client side
+    import('gsap').then(({ gsap: gsapInstance }) => {
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger: ScrollTriggerInstance }) => {
+        gsap = gsapInstance;
+        ScrollTrigger = ScrollTriggerInstance;
+        
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
 
-    // Section scroll animations
-    const sections = gsap.utils.toArray('.section-title');
-    sections.forEach((section: any) => {
-      gsap.fromTo(section, 
-        { opacity: 0, y: 30 }, 
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.6, 
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
+        // Hero section entrance animations
+        const heroTl = gsap.timeline();
+        heroTl
+          .fromTo(".hero-title", 
+            { opacity: 0, y: 50 }, 
+            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+          )
+          .fromTo(".hero-subtitle", 
+            { opacity: 0, y: 30 }, 
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4"
+          )
+          .fromTo(".hero-description", 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3"
+          )
+          .fromTo(".hero-buttons", 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3"
+          )
+          .fromTo(".hero-resume", 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2"
+          )
+          .fromTo(".hero-image", 
+            { opacity: 0, scale: 0.8 }, 
+            { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6"
+          );
+
+        // Section scroll animations
+        const sections = gsap.utils.toArray('.section-title');
+        sections.forEach((section: any) => {
+          gsap.fromTo(section, 
+            { opacity: 0, y: 30 }, 
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.6, 
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+              }
+            }
+          );
+        });
+
+        // Education card animation
+        gsap.fromTo(".education-card", 
+          { opacity: 0, y: 40 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.7, 
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".education-card",
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      );
-    });
+        );
 
-    // Education card animation
-    gsap.fromTo(".education-card", 
-      { opacity: 0, y: 40 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.7, 
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".education-card",
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
+        // Experience cards animation
+        const experienceCards = gsap.utils.toArray('.experience-card');
+        experienceCards.forEach((card: any, index: number) => {
+          gsap.fromTo(card, 
+            { opacity: 0, x: index % 2 === 0 ? -50 : 50 }, 
+            { 
+              opacity: 1, 
+              x: 0, 
+              duration: 0.6, 
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+              }
+            }
+          );
+        });
 
-    // Experience cards animation
-    const experienceCards = gsap.utils.toArray('.experience-card');
-    experienceCards.forEach((card: any, index: number) => {
-      gsap.fromTo(card, 
-        { opacity: 0, x: index % 2 === 0 ? -50 : 50 }, 
-        { 
-          opacity: 1, 
-          x: 0, 
-          duration: 0.6, 
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
+        // Skills animation with stagger
+        const skillTags = gsap.utils.toArray('.skill-tag');
+        gsap.fromTo(skillTags, 
+          { opacity: 0, scale: 0.8 }, 
+          { 
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.4, 
+            ease: "back.out(1.7)",
+            stagger: 0.05,
+            scrollTrigger: {
+              trigger: ".skill-tag",
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      );
-    });
+        );
 
-    // Skills animation with stagger
-    const skillTags = gsap.utils.toArray('.skill-tag');
-    gsap.fromTo(skillTags, 
-      { opacity: 0, scale: 0.8 }, 
-      { 
-        opacity: 1, 
-        scale: 1, 
-        duration: 0.4, 
-        ease: "back.out(1.7)",
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: ".skill-tag",
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // Project cards animation with stagger
-    const projectCards = gsap.utils.toArray('.project-card');
-    gsap.fromTo(projectCards, 
-      { opacity: 0, y: 50 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: ".project-card",
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // Contact cards animation
-    const contactCards = gsap.utils.toArray('.contact-card');
-    contactCards.forEach((card: any, index: number) => {
-      gsap.fromTo(card, 
-        { opacity: 0, y: 30 }, 
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.6, 
-          ease: "power2.out",
-          delay: index * 0.2,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
+        // Project cards animation with stagger
+        const projectCards = gsap.utils.toArray('.project-card');
+        gsap.fromTo(projectCards, 
+          { opacity: 0, y: 50 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.6, 
+            ease: "power2.out",
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: ".project-card",
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      );
-    });
+        );
 
-    // Hover animations for project cards
-    projectCards.forEach((card: any) => {
-      const hoverTl = gsap.timeline({ paused: true });
-      hoverTl.to(card, { y: -10, duration: 0.3, ease: "power2.out" });
-      
-      card.addEventListener('mouseenter', () => hoverTl.play());
-      card.addEventListener('mouseleave', () => hoverTl.reverse());
-    });
+        // Contact cards animation
+        const contactCards = gsap.utils.toArray('.contact-card');
+        contactCards.forEach((card: any, index: number) => {
+          gsap.fromTo(card, 
+            { opacity: 0, y: 30 }, 
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.6, 
+              ease: "power2.out",
+              delay: index * 0.2,
+              scrollTrigger: {
+                trigger: card,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+              }
+            }
+          );
+        });
 
-    // Hover animations for buttons
-    const buttons = gsap.utils.toArray('.hover-button');
-    buttons.forEach((button: any) => {
-      const hoverTl = gsap.timeline({ paused: true });
-      hoverTl.to(button, { scale: 1.05, duration: 0.2, ease: "power2.out" });
-      
-      button.addEventListener('mouseenter', () => hoverTl.play());
-      button.addEventListener('mouseleave', () => hoverTl.reverse());
-    });
+        // Hover animations for project cards
+        projectCards.forEach((card: any) => {
+          const hoverTl = gsap.timeline({ paused: true });
+          hoverTl.to(card, { y: -10, duration: 0.3, ease: "power2.out" });
+          
+          card.addEventListener('mouseenter', () => hoverTl.play());
+          card.addEventListener('mouseleave', () => hoverTl.reverse());
+        });
 
-    // Cleanup function
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+        // Hover animations for buttons
+        const buttons = gsap.utils.toArray('.hover-button');
+        buttons.forEach((button: any) => {
+          const hoverTl = gsap.timeline({ paused: true });
+          hoverTl.to(button, { scale: 1.05, duration: 0.2, ease: "power2.out" });
+          
+          button.addEventListener('mouseenter', () => hoverTl.play());
+          button.addEventListener('mouseleave', () => hoverTl.reverse());
+        });
+
+        // Cleanup function
+        return () => {
+          ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+      });
+    });
   }, [language]); // Re-run animations when language changes
 
   const toggleLanguage = () => {
