@@ -205,7 +205,7 @@ const projects = [
     description: "A real-time face recognizer built with YOLOv3-face, capable of recognizing faces from live webcam feeds. May used for Attendance system, or lock systems.",
     tools: ["Python", "OpenCV", "Face_Recognition", "PyQt5"],
     github: "https://github.com/youssefmmagdy/Face-Recognizer",
-    download: "https://drive.google.com/uc?export=download&id=1mADwAxm1BsdAZg2wfrsEWfEj2vueqljp"
+    download: "https://drive.google.com/uc?export=download&id=1eMDQWvx82-_gV6txRN0hzFVg48mNBt5L"
   },
   {
     title: "Face-Detector",
@@ -587,6 +587,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
                       aria-label="Download project"
+                      download
                     >
                       <DownloadIcon />
                     </a>
