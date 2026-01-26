@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import { useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,6 +12,12 @@ export function meta({}: Route.MetaArgs) {
 const EmailIcon = () => (
   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
   </svg>
 );
 
@@ -45,6 +52,146 @@ const ExternalLinkIcon = () => (
   </svg>
 );
 
+const HamburgerIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+
+// Translations
+const translations = {
+  en: {
+    nav: {
+      about: "About",
+      experience: "Experience",
+      skills: "Skills",
+      projects: "Projects",
+      contact: "Contact",
+      language: "DE"
+    },
+    hero: {
+      title: "Youssef Magdy",
+      subtitle: "Software Engineer & AI Enthusiast",
+      resume: "My Resume",
+      description: "Passionate software engineer specializing in AI, Machine Learning, and Full-Stack Development. Currently pursuing my degree at the German International University in Berlin with a GPA of 1.46. I love building intelligent systems that solve real-world problems.",
+      getInTouch: "Get in Touch",
+      viewProjects: "View Projects"
+    },
+    education: {
+      title: "Education",
+      university: "German International University in Berlin",
+      faculty: "Faculty of Media Engineering and Technology",
+      graduation: "Expected Graduation: 2026",
+      gpa: "GPA: 1.46"
+    },
+    experience: {
+      title: "Work Experience",
+      experiences: [
+        {
+          title: "Junior Teaching Assistant",
+          company: "German University in Cairo",
+          period: "Sep 2024 - Dec 2024",
+          description: "Data Structures and Algorithms with Java - Helping and explaining to students in worksheets"
+        },
+        {
+          title: "Software Developer Intern",
+          company: "Hotel Am Borsigturm, Germany",
+          period: "Oct 2023 - Nov 2023",
+          description: "Built Frontend website using HTML & Tailwind | Developed Automated-PDF-Generator"
+        },
+        {
+          title: "Technical Support Intern",
+          company: "Orange Business",
+          period: "Jul 2024 - Aug 2024",
+          description: "Network Security, Technical Support, Cloud Partitioner and Cloud Solution Architect"
+        }
+      ]
+    },
+    skills: {
+      title: "Technical Knowledge"
+    },
+    projects: {
+      title: "Projects"
+    },
+    contact: {
+      title: "Get in Touch",
+      contactInfo: "Contact Information",
+      connect: "Connect With Me",
+      linkedin: "LinkedIn",
+      github: "GitHub"
+    },
+    footer: "All rights reserved."
+  },
+  de: {
+    nav: {
+      about: "Über mich",
+      experience: "Erfahrung",
+      skills: "Fähigkeiten",
+      projects: "Projekte",
+      contact: "Kontakt",
+      language: "EN"
+    },
+    hero: {
+      title: "Youssef Magdy",
+      subtitle: "Software-Ingenieur & KI-Enthusiast",
+      resume: "Mein Lebenslauf",
+      description: "Leidenschaftlicher Software-Ingenieur, spezialisiert auf KI, maschinelles Lernen und Full-Stack-Entwicklung. Derzeit studiere ich an der German International University in Berlin mit einem Notendurchschnitt von 1,46. Ich liebe es, intelligente Systeme zu entwickeln, die reale Probleme lösen.",
+      getInTouch: "Kontakt aufnehmen",
+      viewProjects: "Projekte ansehen"
+    },
+    education: {
+      title: "Bildung",
+      university: "German International University in Berlin",
+      faculty: "Fakultät für Medieningenieurwesen und Technologie",
+      graduation: "Voraussichtlicher Abschluss: 2026",
+      gpa: "Notendurchschnitt: 1,46"
+    },
+    experience: {
+      title: "Berufserfahrung",
+      experiences: [
+        {
+          title: "Junior Lehrassistent",
+          company: "German University in Cairo",
+          period: "Sep 2024 - Dez 2024",
+          description: "Datenstrukturen und Algorithmen mit Java - Unterstützung und Erklärung für Studenten in Arbeitsblättern"
+        },
+        {
+          title: "Software-Entwickler Praktikant",
+          company: "Hotel Am Borsigturm, Deutschland",
+          period: "Okt 2023 - Nov 2023",
+          description: "Frontend-Website mit HTML & Tailwind erstellt | Automatischen PDF-Generator entwickelt"
+        },
+        {
+          title: "Technischer Support Praktikant",
+          company: "Orange Business",
+          period: "Jul 2024 - Aug 2024",
+          description: "Netzwerksicherheit, technischer Support, Cloud-Partitionierung und Cloud-Lösungsarchitekt"
+        }
+      ]
+    },
+    skills: {
+      title: "Technisches Wissen"
+    },
+    projects: {
+      title: "Projekte"
+    },
+    contact: {
+      title: "Kontakt aufnehmen",
+      contactInfo: "Kontaktinformationen",
+      connect: "Mit mir verbinden",
+      linkedin: "LinkedIn",
+      github: "GitHub"
+    },
+    footer: "Alle Rechte vorbehalten."
+  }
+};
+
 // Data
 const technicalSkills = [
   "LLMs", "Neural Networks", "Transfer Learning", "Convolutional NNs", "Transformer", "Fine-tuning", "Embedding",
@@ -54,10 +201,18 @@ const technicalSkills = [
 const projects = [
   
   {
+    title: "Face-Recognizer",
+    description: "A real-time face recognizer built with YOLOv3-face, capable of recognizing faces from live webcam feeds. May used for Attendance system, or lock systems.",
+    tools: ["Python", "OpenCV", "Face_Recognition", "PyQt5"],
+    github: "https://github.com/youssefmmagdy/Face-Recognizer",
+    download: "https://drive.google.com/uc?export=download&id=1mADwAxm1BsdAZg2wfrsEWfEj2vueqljp"
+  },
+  {
     title: "Face-Detector",
     description: "A real-time face detection and tracking system built with YOLOv3-face, capable of detecting and capturing distinct faces from images, videos, or live webcam feeds.",
     tools: ["Python", "OpenCV", "Face_Recognition", "PyQt5"],
-    github: "https://github.com/youssefmmagdy/Face-Detector"
+    github: "https://github.com/youssefmmagdy/Face-Detector",
+    download: "https://drive.google.com/uc?export=download&id=1mADwAxm1BsdAZg2wfrsEWfEj2vueqljp"
   },
   {
     title: "E-Commerce Sentiment Analysis | Knowledge Graph | Graph-RAG-Chatbot",
@@ -197,6 +352,19 @@ const experiences = [
 ];
 
 export default function Home() {
+  const [language, setLanguage] = useState<'en' | 'de'>('en');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'en' ? 'de' : 'en');
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev);
+  };
+
+  const t = translations[language];
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault();
@@ -214,60 +382,126 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <a href="#" className="text-xl font-bold text-gray-900">Youssef Magdy</a>
-            <div className="hidden md:flex gap-8">
-              <a href="#about" className="nav-link" onClick={(e) => handleNavClick(e, '#about')}>About</a>
-              <a href="#experience" className="nav-link" onClick={(e) => handleNavClick(e, '#experience')}>Experience</a>
-              <a href="#skills" className="nav-link" onClick={(e) => handleNavClick(e, '#skills')}>Skills</a>
-              <a href="#projects" className="nav-link" onClick={(e) => handleNavClick(e, '#projects')}>Projects</a>
-              <a href="#contact" className="nav-link" onClick={(e) => handleNavClick(e, '#contact')}>Contact</a>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-8 items-center">
+              <a href="#about" className="nav-link" onClick={(e) => handleNavClick(e, '#about')}>{t.nav.about}</a>
+              <a href="#experience" className="nav-link" onClick={(e) => handleNavClick(e, '#experience')}>{t.nav.experience}</a>
+              <a href="#skills" className="nav-link" onClick={(e) => handleNavClick(e, '#skills')}>{t.nav.skills}</a>
+              <a href="#projects" className="nav-link" onClick={(e) => handleNavClick(e, '#projects')}>{t.nav.projects}</a>
+              <a href="#contact" className="nav-link" onClick={(e) => handleNavClick(e, '#contact')}>{t.nav.contact}</a>
+              <button
+                onClick={toggleLanguage}
+                className="px-3 py-1 bg-red-700 text-white rounded font-medium hover:bg-red-800 transition-colors"
+              >
+                {t.nav.language}
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center gap-4">
+              <button
+                onClick={toggleLanguage}
+                className="px-2 py-1 bg-red-700 text-white rounded text-sm font-medium hover:bg-red-800 transition-colors"
+              >
+                {t.nav.language}
+              </button>
+              <button
+                onClick={toggleMobileMenu}
+                className="p-2 text-gray-600 hover:text-red-700 transition-colors"
+                aria-label="Toggle mobile menu"
+              >
+                {isMobileMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+              </button>
             </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
+              <div className="flex flex-col gap-4">
+                <a 
+                  href="#about" 
+                  className="nav-link" 
+                  onClick={(e) => { handleNavClick(e, '#about'); setIsMobileMenuOpen(false); }}
+                >
+                  {t.nav.about}
+                </a>
+                <a 
+                  href="#experience" 
+                  className="nav-link" 
+                  onClick={(e) => { handleNavClick(e, '#experience'); setIsMobileMenuOpen(false); }}
+                >
+                  {t.nav.experience}
+                </a>
+                <a 
+                  href="#skills" 
+                  className="nav-link" 
+                  onClick={(e) => { handleNavClick(e, '#skills'); setIsMobileMenuOpen(false); }}
+                >
+                  {t.nav.skills}
+                </a>
+                <a 
+                  href="#projects" 
+                  className="nav-link" 
+                  onClick={(e) => { handleNavClick(e, '#projects'); setIsMobileMenuOpen(false); }}
+                >
+                  {t.nav.projects}
+                </a>
+                <a 
+                  href="#contact" 
+                  className="nav-link" 
+                  onClick={(e) => { handleNavClick(e, '#contact'); setIsMobileMenuOpen(false); }}
+                >
+                  {t.nav.contact}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <header id="about" className="pt-32 pb-20 px-6">
+      <header id="about" className="pt-24 pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1">
-              <h1 className="text-5xl font-bold text-gray-900 mb-4">
-                Youssef Magdy
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="flex-1 text-center md:text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                {t.hero.title}
               </h1>
-              <p className="text-2xl text-red-700 font-medium mb-6">
-                Software Engineer & AI Enthusiast
+              <p className="text-xl sm:text-2xl text-red-700 font-medium mb-4 md:mb-6">
+                {t.hero.subtitle}
               </p>
               
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Passionate software engineer specializing in AI, Machine Learning, and Full-Stack Development. 
-                Currently pursuing my degree at the German International University in Berlin with a GPA of 1.46. 
-                I love building intelligent systems that solve real-world problems.
+              <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
+                {t.hero.description}
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
                 <a
                   href="#contact"
-                  className="px-6 py-3 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 transition-colors"
+                  className="px-6 py-3 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 transition-colors text-center"
                   onClick={(e) => handleNavClick(e, '#contact')}
                 >
-                  Get in Touch
+                  {t.hero.getInTouch}
                 </a>
                 <a
                   href="#projects"
-                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-red-700 hover:text-red-700 transition-colors"
+                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-red-700 hover:text-red-700 transition-colors text-center"
                   onClick={(e) => handleNavClick(e, '#projects')}
                 >
-                  View Projects
+                  {t.hero.viewProjects}
                 </a>
-                <a
-                href="https://raw.githubusercontent.com/youssefmmagdy/profile_website/b4f81ad2edc35b57f5621ef1047de6a36e5c03b0/Youssef_Magdy_Resume.pdf"
-                // target="_blank"
-                // rel="noopener noreferrer"
-                className="inline-block text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors mt-3"
-              >
-                My Resume
-              </a>
               </div>
+              <a
+                href="https://raw.githubusercontent.com/youssefmmagdy/profile_website/b4f81ad2edc35b57f5621ef1047de6a36e5c03b0/Youssef_Magdy_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 px-6 py-2 text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors"
+              >
+                {t.hero.resume}
+              </a>
             </div>
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden mt-8 md:mt-0">
               <img 
                 src="soora.jpg" 
                 alt="Youssef Magdy Profile Picture" 
@@ -279,19 +513,19 @@ export default function Home() {
       </header>
 
       {/* Education Section */}
-      <section className="py-16 px-6 bg-gray-50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-title">Education</h2>
+          <h2 className="section-title">{t.education.title}</h2>
           <div className="card">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900">German International University in Berlin</h3>
-                <p className="text-red-700 font-medium">Faculty of Media Engineering and Technology</p>
-                <p className="text-gray-600 mt-2">Expected Graduation: 2026</p>
+              <div className="mb-4 md:mb-0">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{t.education.university}</h3>
+                <p className="text-red-700 font-medium">{t.education.faculty}</p>
+                <p className="text-gray-600 mt-2">{t.education.graduation}</p>
               </div>
-              <div className="mt-4 md:mt-0">
-                <span className="px-4 py-2 bg-red-100 text-red-800 rounded-full font-bold text-lg">
-                  GPA: 1.46
+              <div className="md:text-right">
+                <span className="px-3 sm:px-4 py-2 bg-red-100 text-red-800 rounded-full font-bold text-base sm:text-lg">
+                  {t.education.gpa}
                 </span>
               </div>
             </div>
@@ -300,17 +534,17 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-16 px-6">
+      <section id="experience" className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-title">Work Experience</h2>
-          <div className="space-y-6">
-            {experiences.map((exp, index) => (
+          <h2 className="section-title">{t.experience.title}</h2>
+          <div className="space-y-4 sm:space-y-6">
+            {t.experience.experiences.map((exp, index) => (
               <div key={index} className="card border-l-4 border-l-red-700">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900">{exp.title}</h3>
+                  <div className="mb-2 md:mb-0">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{exp.title}</h3>
                     <p className="text-red-700 font-medium">{exp.company}</p>
-                    <p className="text-gray-600 mt-2">{exp.description}</p>
+                    <p className="text-gray-600 mt-2 text-sm sm:text-base">{exp.description}</p>
                   </div>
                   <span className="mt-2 md:mt-0 text-sm text-gray-500 font-medium whitespace-nowrap">
                     {exp.period}
@@ -323,10 +557,10 @@ export default function Home() {
       </section>
 
       {/* Technical Skills Section */}
-      <section id="skills" className="py-16 px-6 bg-gray-50">
+      <section id="skills" className="py-12 sm:py-16 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-title">Technical Knowledge</h2>
-          <div className="flex flex-wrap gap-3">
+          <h2 className="section-title">{t.skills.title}</h2>
+          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start">
             {technicalSkills.map((skill, index) => (
               <span key={index} className="skill-tag">
                 {skill}
@@ -337,26 +571,39 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-16 px-6">
+      <section id="projects" className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-title">Projects</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <h2 className="section-title">{t.projects.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {projects.map((project, index) => (
               <div key={index} className="project-card">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-semibold text-gray-900 pr-4">{project.title}</h3>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-blue-600 transition-colors flex-shrink-0"
-                    aria-label="View on GitHub"
-                  >
-                    <ExternalLinkIcon />
-                  </a>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 pr-4">{project.title}</h3>
+                  <div className="flex gap-2 sm:gap-3">
+                    {(project.download && 
+                    <a
+                      href={project.download}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
+                      aria-label="Download project"
+                    >
+                      <DownloadIcon />
+                    </a>
+                    )}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
+                      aria-label="View on GitHub"
+                    >
+                      <ExternalLinkIcon />
+                    </a>
+                  </div>
                 </div>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1 sm:gap-2">
                   {project.tools.map((tool, toolIndex) => (
                     <span
                       key={toolIndex}
@@ -373,16 +620,16 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-6 bg-gray-50">
+      <section id="contact" className="py-12 sm:py-16 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-title">Get in Touch</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <h2 className="section-title">{t.contact.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Contact Information</h3>
-              <div className="space-y-4">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">{t.contact.contactInfo}</h3>
+              <div className="space-y-3 sm:space-y-4">
                 <a href="mailto:Youssefmmagdy55@gmail.com" className="contact-link">
                   <EmailIcon />
-                  <span>Youssefmmagdy55@gmail.com</span>
+                  <span className="break-all">Youssefmmagdy55@gmail.com</span>
                 </a>
                 <div className="contact-link">
                   <PhoneIcon />
@@ -395,25 +642,25 @@ export default function Home() {
               </div>
             </div>
             <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Connect With Me</h3>
-              <div className="flex gap-4">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">{t.contact.connect}</h3>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
                   href="https://www.linkedin.com/in/youssefmmagdy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors text-sm sm:text-base"
                 >
                   <LinkedInIcon />
-                  <span>LinkedIn</span>
+                  <span>{t.contact.linkedin}</span>
                 </a>
                 <a
                   href="https://github.com/youssefmmagdy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm sm:text-base"
                 >
                   <GitHubIcon />
-                  <span>GitHub</span>
+                  <span>{t.contact.github}</span>
                 </a>
               </div>
             </div>
@@ -422,9 +669,9 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-gray-200">
+      <footer className="py-8 px-4 sm:px-6 border-t border-gray-200">
         <div className="max-w-6xl mx-auto text-center text-gray-600">
-          <p>&copy; {new Date().getFullYear()} Youssef Magdy. All rights reserved.</p>
+          <p className="text-sm sm:text-base">&copy; {new Date().getFullYear()} Youssef Magdy. {t.footer}</p>
         </div>
       </footer>
     </div>
