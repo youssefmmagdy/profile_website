@@ -547,6 +547,10 @@ export default function Home() {
 
   const t = translations[language];
 
+  const resumeUrl = language === 'de' 
+    ? "https://github.com/youssefmmagdy/profile_website/raw/e3acd3af5837646bd0645b4d467d06ff4f8ce503/Youssef_Magdy_Lebenslauf.pdf"
+    : "https://github.com/youssefmmagdy/profile_website/raw/e3acd3af5837646bd0645b4d467d06ff4f8ce503/Youssef_Magdy_Resume.pdf";
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault();
@@ -675,7 +679,7 @@ export default function Home() {
                 </a>
               </div>
               <a
-                href="https://raw.githubusercontent.com/youssefmmagdy/profile_website/b4f81ad2edc35b57f5621ef1047de6a36e5c03b0/Youssef_Magdy_Resume.pdf"
+                href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero-resume inline-block mt-4 px-6 py-2 text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors"
