@@ -205,14 +205,14 @@ const projects = [
     description: "A real-time face recognizer built with YOLOv3-face, capable of recognizing faces from live webcam feeds. May used for Attendance system, or lock systems.",
     tools: ["Python", "OpenCV", "Face_Recognition", "PyQt5"],
     github: "https://github.com/youssefmmagdy/Face-Recognizer",
-    download: "https://drive.google.com/uc?export=download&id=1eMDQWvx82-_gV6txRN0hzFVg48mNBt5L"
+    download: "https://drive.google.com/uc?export=download&id=1ts3ocTxO3ffQDbaRRMeUGIFjk7vd_UKe"
   },
   {
     title: "Face-Detector",
     description: "A real-time face detection and tracking system built with YOLOv3-face, capable of detecting and capturing distinct faces from images, videos, or live webcam feeds.",
     tools: ["Python", "OpenCV", "Face_Recognition", "PyQt5"],
     github: "https://github.com/youssefmmagdy/Face-Detector",
-    download: "https://drive.google.com/uc?export=download&id=1eMDQWvx82-_gV6txRN0hzFVg48mNBt5L"
+    download: "https://drive.google.com/uc?export=download&id=1mADwAxm1BsdAZg2wfrsEWfEj2vueqljp"
   },
   {
     title: "E-Commerce Sentiment Analysis | Knowledge Graph | Graph-RAG-Chatbot",
