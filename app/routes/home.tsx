@@ -68,6 +68,12 @@ const CloseIcon = () => (
   </svg>
 );
 
+const ChatIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+  </svg>
+);
+
 // Translations
 const translations = {
   en: {
@@ -358,6 +364,8 @@ const experiences = [
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'de'>('en');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
 
   useEffect(() => {
     // Only run animations on the client side and when DOM is available
@@ -761,7 +769,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <h2 className="section-title">{t.projects.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {projects.map((project, index) => (
+            {projects.slice(0, showAllProjects ? projects.length : 6).map((project, index) => (
               <div key={index} className="project-card">
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900 pr-4">{project.title}</h3>
@@ -803,6 +811,16 @@ export default function Home() {
               </div>
             ))}
           </div>
+          {projects.length > 6 && (
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => setShowAllProjects(prev => !prev)}
+                className="px-4 py-2 bg-transparent text-red-700 border border-red-700 rounded hover:bg-red-700 hover:text-white transition-colors"
+              >
+                {showAllProjects ? 'Show less' : 'Show more'}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -824,7 +842,7 @@ export default function Home() {
                 </div>
                 <div className="contact-link">
                   <LocationIcon />
-                  <span>Tegel, Berlin, Germany</span>
+                  <span>Berlin, Germany</span>
                 </div>
               </div>
             </div>
@@ -861,6 +879,7 @@ export default function Home() {
           <p className="text-sm sm:text-base">&copy; {new Date().getFullYear()} Youssef Magdy. {t.footer}</p>
         </div>
       </footer>
+
     </div>
   );
 }
