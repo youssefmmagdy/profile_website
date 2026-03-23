@@ -74,6 +74,14 @@ const ChatIcon = () => (
   </svg>
 );
 
+type YouTubeOEmbedData = {
+  title: string;
+  author_name: string;
+  thumbnail_url: string;
+};
+
+const transformersUrl = "https://youtu.be/4jJ4dTZyD64?si=qZD7KiHI3Tds3Fr-";
+
 // Translations
 const translations = {
   en: {
@@ -99,6 +107,14 @@ const translations = {
       faculty: "Faculty of Media Engineering and Technology",
       graduation: "Expected Graduation: 2026",
       gpa: "GPA: 1.46"
+    },
+    youtube: {
+      title: "Professional Highlight",
+      cardTitle: "YouTube Playlist About Transformers",
+      description: "I built a YouTube learning playlist focused on Transformers and practical AI concepts.",
+      cta: "Open on YouTube",
+      loading: "Loading playlist details...",
+      fallbackAuthor: "Youssef Magdy"
     },
     experience: {
       title: "Work Experience",
@@ -161,6 +177,14 @@ const translations = {
       faculty: "Fakultät für Medieningenieurwesen und Technologie",
       graduation: "Voraussichtlicher Abschluss: 2026",
       gpa: "Notendurchschnitt: 1,46"
+    },
+    youtube: {
+      title: "Professionelles Highlight",
+      cardTitle: "YouTube-Playlist zu Transformers",
+      description: "Ich habe eine YouTube-Lernplaylist rund um Transformer und praktische KI-Konzepte erstellt.",
+      cta: "Auf YouTube öffnen",
+      loading: "Playlist-Details werden geladen...",
+      fallbackAuthor: "Youssef Magdy"
     },
     experience: {
       title: "Berufserfahrung",
@@ -365,7 +389,42 @@ export default function Home() {
   const [language, setLanguage] = useState<'en' | 'de'>('en');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [youtubeData, setYoutubeData] = useState<YouTubeOEmbedData | null>(null);
+  const [isYoutubeLoading, setIsYoutubeLoading] = useState(true);
 
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadYoutubeData = async () => {
+      try {
+        // oEmbed does not require an API key and is reliable for public YouTube URLs.
+        const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(transformersUrl)}&format=json`;
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+          throw new Error(`YouTube oEmbed failed with status ${response.status}`);
+        }
+
+        const data: YouTubeOEmbedData = await response.json();
+        if (isMounted) {
+          setYoutubeData(data);
+        }
+      } catch {
+        // Keep UI functional with fallback text if metadata loading fails.
+      } finally {
+        if (isMounted) {
+          setIsYoutubeLoading(false);
+        }
+      }
+    };
+
+    loadYoutubeData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     // Only run animations on the client side and when DOM is available
@@ -539,7 +598,7 @@ export default function Home() {
 
         // Cleanup function
         return () => {
-          ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+          ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
         };
       });
     });
@@ -727,6 +786,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* YouTube Playlist Section */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="section-title">{t.youtube.title}</h2>
+          <div className="card">
+            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+              {youtubeData?.thumbnail_url && (
+                <img
+                  src={youtubeData.thumbnail_url}
+                  alt={youtubeData.title}
+                  className="w-full md:w-64 rounded-lg shadow-sm object-cover"
+                  loading="lazy"
+                />
+              )}
+
+              <div className="flex-1">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                  {youtubeData?.title ?? t.youtube.cardTitle}
+                </h3>
+                <p className="text-gray-600 mt-2 leading-relaxed">
+                  {t.youtube.description}
+                </p>
+                <p className="text-sm text-gray-500 mt-2">
+                  {isYoutubeLoading
+                    ? t.youtube.loading
+                    : (youtubeData?.author_name ?? t.youtube.fallbackAuthor)}
+                </p>
+
+                <a
+                  href={transformersUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover-button inline-flex items-center gap-2 mt-4 px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 transition-colors"
+                >
+                  <span>{t.youtube.cta}</span>
+                  <ExternalLinkIcon />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
       <section id="experience" className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
@@ -779,7 +881,7 @@ export default function Home() {
                       href={project.download}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
+                      className="text-gray-400 hover:text-red-600 transition-colors shrink-0"
                       aria-label="Download project"
                       download
                     >
@@ -790,7 +892,7 @@ export default function Home() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
+                      className="text-gray-400 hover:text-red-600 transition-colors shrink-0"
                       aria-label="View on GitHub"
                     >
                       <ExternalLinkIcon />
