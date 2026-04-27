@@ -621,8 +621,8 @@ export default function Home() {
   const t = translations[language];
 
   const resumeUrl = language === 'de' 
-    ? "/Youssef_Magdy_Lebenslauf.pdf"
-    : "/Youssef_Magdy_Resume.pdf";
+    ? "https://raw.githubusercontent.com/youssefmmagdy/profile_website/main/Youssef_Magdy_Lebenslauf.pdf"
+    : "https://raw.githubusercontent.com/youssefmmagdy/profile_website/main/Youssef_Magdy_Resume.pdf";
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
