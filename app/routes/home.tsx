@@ -50,6 +50,12 @@ const GitHubIcon = () => (
   </svg>
 );
 
+const YouTubeIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+);
+
 const ExternalLinkIcon = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -106,7 +112,7 @@ const translations = {
       university: "German International University in Berlin",
       faculty: "Faculty of Media Engineering and Technology",
       graduation: "Expected Graduation: 2026",
-      gpa: "GPA: 1.46"
+      gpa: "1.46"
     },
     youtube: {
       title: "Professional Highlight",
@@ -300,7 +306,7 @@ const projects = [
     title: "AWS EC2 instances",
     description: "We were downloading 60000 books to a website, so we had to rent instances (computers)",
     tools: ["Linux", "AWS", "Bash"],
-    github: "https://github.com/youssefmmagdy"
+    github: "https://github.com/youssefmmagdy"  
   },
   {
     title: "Names-Generator-Model Deep Neural Network",
@@ -615,8 +621,8 @@ export default function Home() {
   const t = translations[language];
 
   const resumeUrl = language === 'de' 
-    ? "https://github.com/youssefmmagdy/profile_website/raw/e3acd3af5837646bd0645b4d467d06ff4f8ce503/Youssef_Magdy_Lebenslauf.pdf"
-    : "https://github.com/youssefmmagdy/profile_website/raw/e3acd3af5837646bd0645b4d467d06ff4f8ce503/Youssef_Magdy_Resume.pdf";
+    ? "/Youssef_Magdy_Lebenslauf.pdf"
+    : "/Youssef_Magdy_Resume.pdf";
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
@@ -718,8 +724,18 @@ export default function Home() {
       <header id="about" className="pt-24 pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="flex-1 text-center md:text-left">
-              <h1 className="hero-title text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {/* Image - appears first on mobile, moves right on desktop */}
+            <div className="hero-image w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden md:order-2">
+              <img 
+                src="soora.jpg" 
+                alt="Youssef Magdy Profile Picture" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Text content - appears second on mobile, on left on desktop */}
+            <div className="flex-1 text-center md:text-left md:order-1">
+              <h1 className="hero-title hidden md:block text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 {t.hero.title}
               </h1>
               <p className="hero-subtitle text-xl sm:text-2xl text-red-700 font-medium mb-4 md:mb-6">
@@ -749,17 +765,35 @@ export default function Home() {
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hero-resume inline-block mt-4 px-6 py-2 text-red-700 underline rounded-lg font-medium hover:text-red-800 transition-colors"
+                className="hero-resume block mt-8"
               >
-                {t.hero.resume}
+                <div className="relative w-full max-w-sm bg-white border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer group">
+                  <div className="relative">
+                    {/* Resume Preview */}
+                    <div className="relative w-full h-72 bg-gray-100 overflow-hidden flex items-center justify-center">
+                      <img
+                        src="/image.png"
+                        alt="Resume Preview"
+                        className="w-full h-full object-cover"
+                        style={{ pointerEvents: 'none' }}
+                      />
+                      {/* Overlay gradient for "half hidden" effect */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white pointer-events-none"></div>
+                    </div>
+                    {/* Info and CTA */}
+                    <div className="relative p-4 bg-white border-t border-gray-200">
+                      <div className="text-center mb-3">
+                        <p className="text-sm text-gray-500 mb-1">My Resume</p>
+                        <h4 className="text-base font-bold text-gray-900">Youssef Magdy</h4>
+                      </div>
+                      <div className="flex items-center justify-center gap-2 px-4 py-2 bg-red-700 text-white rounded-lg font-medium group-hover:bg-red-800 transition-colors text-sm">
+                        <span>View Full Resume</span>
+                        <ExternalLinkIcon />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </a>
-            </div>
-            <div className="hero-image w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full flex items-center justify-center shadow-2xl overflow-hidden mt-8 md:mt-0">
-              <img 
-                src="soora.jpg" 
-                alt="Youssef Magdy Profile Picture" 
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>
@@ -776,10 +810,19 @@ export default function Home() {
                 <p className="text-red-700 font-medium">{t.education.faculty}</p>
                 <p className="text-gray-600 mt-2">{t.education.graduation}</p>
               </div>
-              <div className="md:text-right">
-                <span className="px-3 sm:px-4 py-2 bg-red-100 text-red-800 rounded-full font-bold text-base sm:text-lg">
-                  {t.education.gpa}
-                </span>
+              <div className="md:text-right flex flex-col sm:flex-row gap-4 justify-center md:justify-end items-center">
+                <div className="text-center sm:text-right">
+                  <p className="text-xs text-gray-500 mb-3">German GPA</p>
+                  <span className="px-3 sm:px-4 py-2 bg-red-100 text-red-800 rounded-full font-bold text-base sm:text-lg">
+                    {t.education.gpa}
+                  </span>
+                </div>
+                <div className="text-center sm:text-right">
+                  <p className="text-xs text-gray-500 mb-3">US GPA (4.0 scale)</p>
+                  <span className="px-3 sm:px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-bold text-base sm:text-lg">
+                    3.60
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -872,10 +915,16 @@ export default function Home() {
           <h2 className="section-title">{t.projects.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {projects.slice(0, showAllProjects ? projects.length : 6).map((project, index) => (
-              <div key={index} className="project-card">
+              <a
+                key={index}
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card block cursor-pointer"
+              >
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900 pr-4">{project.title}</h3>
-                  <div className="flex gap-2 sm:gap-3">
+                  <div className="flex gap-2 sm:gap-3" onClick={(e) => e.stopPropagation()}>
                     {(project.download && 
                     <a
                       href={project.download}
@@ -884,19 +933,17 @@ export default function Home() {
                       className="text-gray-400 hover:text-red-600 transition-colors shrink-0"
                       aria-label="Download project"
                       download
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <DownloadIcon />
                     </a>
                     )}
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <div
                       className="text-gray-400 hover:text-red-600 transition-colors shrink-0"
                       aria-label="View on GitHub"
                     >
                       <ExternalLinkIcon />
-                    </a>
+                    </div>
                   </div>
                 </div>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
@@ -910,7 +957,7 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           {projects.length > 6 && (
@@ -968,6 +1015,15 @@ export default function Home() {
                 >
                   <GitHubIcon />
                   <span>{t.contact.github}</span>
+                </a>
+                <a
+                  href="https://youtube.com/@yusuf-magdy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover-button flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm sm:text-base"
+                >
+                  <YouTubeIcon />
+                  <span>YouTube</span>
                 </a>
               </div>
             </div>
