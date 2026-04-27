@@ -182,7 +182,7 @@ const translations = {
       university: "German International University in Berlin",
       faculty: "Fakultät für Medieningenieurwesen und Technologie",
       graduation: "Voraussichtlicher Abschluss: 2026",
-      gpa: "Notendurchschnitt: 1,46"
+      gpa: "1,46"
     },
     youtube: {
       title: "Professionelles Highlight",
