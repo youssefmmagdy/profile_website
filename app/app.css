@@ -1,40 +1,531 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+/* ============================================================================
+   Design tokens
+   Themeable values live on :root / [data-theme="light"] as `--c-*`.
+   `@theme inline` maps them into Tailwind utilities so `bg-bg`, `text-ink`,
+   `border-line` etc. resolve at runtime and follow the active theme.
+   ========================================================================== */
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo",
+    "Consolas", monospace;
+
+  --color-bg: var(--c-bg);
+  --color-raise: var(--c-raise);
+  --color-surface: var(--c-surface);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-ink: var(--c-ink);
+  --color-dim: var(--c-dim);
+  --color-mute: var(--c-mute);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-cyan: var(--c-cyan);
+  --color-violet: var(--c-violet);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-html {
-  scroll-behavior: smooth;
+:root {
+  color-scheme: dark;
+
+  --c-bg: #08090c;
+  --c-raise: #0d0f15;
+  --c-surface: rgb(255 255 255 / 0.028);
+  --c-line: rgb(255 255 255 / 0.09);
+  --c-line-strong: rgb(255 255 255 / 0.16);
+  --c-ink: #e9ecf3;
+  --c-dim: #98a1b3;
+  --c-mute: #626c80;
+  --c-accent: #5b8cff;
+  --c-accent-soft: rgb(91 140 255 / 0.14);
+  --c-cyan: #22d3ee;
+  --c-violet: #a78bfa;
+
+  --c-glow: rgb(91 140 255 / 0.5);
+  --c-grid: rgb(255 255 255 / 0.045);
+  --c-noise: 0.035;
+
+  --nav-h: 4.25rem;
 }
 
-body {
-  @apply bg-white text-gray-900;
-  font-family: "Poppins", sans-serif;
+[data-theme="light"] {
+  color-scheme: light;
+
+  --c-bg: #fbfbfd;
+  --c-raise: #ffffff;
+  --c-surface: rgb(9 12 20 / 0.022);
+  --c-line: rgb(9 12 20 / 0.1);
+  --c-line-strong: rgb(9 12 20 / 0.2);
+  --c-ink: #0d1220;
+  --c-dim: #4d566b;
+  --c-mute: #77809a;
+  --c-accent: #2f5fe0;
+  --c-accent-soft: rgb(47 95 224 / 0.1);
+  --c-cyan: #0891b2;
+  --c-violet: #7c3aed;
+
+  --c-glow: rgb(47 95 224 / 0.3);
+  --c-grid: rgb(9 12 20 / 0.05);
+  --c-noise: 0.02;
 }
 
-/* Professional Section Styling */
-.section-title {
-  @apply text-xl sm:text-2xl font-bold text-gray-800 border-b-2 border-red-700 pb-2 mb-6;
+/* ============================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--c-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.5s var(--ease-out-expo),
+      color 0.5s var(--ease-out-expo);
+  }
+
+  ::selection {
+    background: var(--c-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-line-strong) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-line-strong);
+    border-radius: 99px;
+    border: 3px solid var(--c-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--c-mute);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
-.card {
-  @apply bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow duration-300;
+/* ============================================================================
+   Ambience — grid, aurora, grain
+   ========================================================================== */
+
+.bg-grid {
+  background-image: linear-gradient(var(--c-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center;
+  mask-image: radial-gradient(
+    ellipse 90% 60% at 50% 0%,
+    #000 20%,
+    transparent 78%
+  );
 }
 
-.skill-tag {
-  @apply px-2 sm:px-3 py-1 sm:py-1.5 bg-red-50 text-red-700 rounded-full text-xs sm:text-sm font-medium border border-red-200;
+.bg-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--c-noise);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.project-card {
-  @apply bg-white rounded-xl shadow-md p-4 sm:p-6 border border-gray-100 hover:shadow-xl hover:border-red-200 transition-all duration-300;
+.aurora {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
 }
 
-.nav-link {
-  @apply text-gray-600 hover:text-red-700 font-medium transition-colors duration-200 text-sm sm:text-base;
+/* ============================================================================
+   Typography helpers
+   ========================================================================== */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-mute);
 }
 
-.contact-link {
-  @apply flex items-center gap-2 text-gray-600 hover:text-red-700 transition-colors duration-200 text-sm sm:text-base;
+.gradient-text {
+  background: linear-gradient(
+    100deg,
+    var(--c-ink) 0%,
+    var(--c-ink) 35%,
+    var(--c-accent) 62%,
+    var(--c-cyan) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.accent-text {
+  background: linear-gradient(100deg, var(--c-accent), var(--c-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================================
+   Surfaces
+   ========================================================================== */
+
+.panel {
+  position: relative;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+/* Hairline highlight along the top edge — reads as lit from above. */
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--c-line-strong) 30%,
+    var(--c-line-strong) 70%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Cursor-tracked spotlight. `--mx`/`--my` are set from JS on pointer move. */
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-expo);
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    var(--c-accent-soft),
+    transparent 62%
+  );
+}
+
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* ============================================================================
+   Controls
+   ========================================================================== */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.625rem;
+  padding: 0.75rem 1.375rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease-out-expo), background-color 0.25s ease,
+    border-color 0.25s ease, color 0.25s ease,
+    box-shadow 0.35s var(--ease-out-expo);
+}
+
+.btn:active {
+  transform: scale(0.975);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-accent), #4a6fe8);
+  color: #fff;
+  box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.16) inset,
+    0 8px 24px -10px var(--c-glow);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.2) inset,
+    0 14px 34px -10px var(--c-glow);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 1px solid var(--c-line);
+  color: var(--c-ink);
+  background: var(--c-surface);
+}
+
+.btn-ghost:hover {
+  border-color: var(--c-line-strong);
+  background: var(--c-accent-soft);
+  transform: translateY(-2px);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--c-line);
+  color: var(--c-dim);
+  background: var(--c-surface);
+  transition: color 0.2s ease, border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: var(--c-ink);
+  border-color: var(--c-line-strong);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--c-line);
+  background: var(--c-surface);
+  padding: 0.3125rem 0.6875rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--c-dim);
+  transition: color 0.2s ease, border-color 0.2s ease,
+    background-color 0.2s ease, transform 0.2s var(--ease-out-expo);
+}
+
+.chip:hover {
+  color: var(--c-ink);
+  border-color: var(--c-line-strong);
+  background: var(--c-accent-soft);
+}
+
+/* ============================================================================
+   Scroll reveal — CSS-driven, toggled by an IntersectionObserver.
+   `--d` stages children within a group.
+   ========================================================================== */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 18px), 0);
+  transition: opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Clip-path wipe for headings */
+.js [data-reveal="wipe"] {
+  clip-path: inset(0 0 105% 0);
+  opacity: 1;
+  transform: none;
+  transition: clip-path 0.9s var(--ease-out-expo);
+  transition-delay: var(--d, 0ms);
+}
+
+[data-reveal="wipe"].is-in {
+  clip-path: inset(-20% 0 -20% 0);
+}
+
+/* ============================================================================
+   Keyframes
+   ========================================================================== */
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.06);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 42s) linear infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 16s ease-in-out infinite;
+}
+
+.animate-caret {
+  animation: caret 1.05s steps(1) infinite;
+}
+
+.animate-rise-in {
+  animation: rise-in 0.55s var(--ease-out-expo) both;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+}
+
+.live-dot {
+  position: relative;
+}
+
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: pulse-ring 2.4s var(--ease-out-expo) infinite;
+}
+
+/* ============================================================================
+   Motion preferences — one global off-switch.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* Conic ring around the hero portrait. */
+@keyframes spin-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-ring {
+  animation: spin-ring 14s linear infinite;
+}
+
+/* Custom pointer — the native cursor is hidden only while it is mounted,
+   which Cursor.tsx does exclusively for fine pointers without reduced motion. */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none;
+}
+
+/* Text fields keep a real caret so typing stays legible. */
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor select {
+  cursor: auto;
 }
