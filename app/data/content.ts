@@ -30,8 +30,8 @@ export const SITE_URL = "https://youssefmagdy.vercel.app";
 export const PROFILE = {
   name: "Youssef Magdy",
   email: "Youssefmmagdy55@gmail.com",
-  phone: "+49 176 36535652",
-  location: "Berlin, Germany",
+  phone: "+201550830082",
+  location: "Cairo, Egypt",
   linkedin: "https://www.linkedin.com/in/youssefmmagdy",
   github: "https://github.com/youssefmmagdy",
   youtube: "https://youtube.com/@yusuf-magdy",

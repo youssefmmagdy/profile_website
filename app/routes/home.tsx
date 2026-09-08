@@ -2,7 +2,6 @@ import { useState } from "react";
 import type { Route } from "./+types/home";
 import CommandPalette from "../components/CommandPalette";
 import Contact from "../components/Contact";
-import { Cursor } from "../components/Cursor";
 import Education from "../components/Education";
 import Experience from "../components/Experience";
 import Footer from "../components/Footer";
@@ -47,8 +46,6 @@ export default function Home() {
 
   return (
     <>
-      <Cursor />
-
       <Navbar
         t={t}
         locale={locale}

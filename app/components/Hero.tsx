@@ -75,16 +75,6 @@ export default function Hero({ t, locale, theme }: Props) {
         <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           {/* ---------- Copy ---------- */}
           <div className="min-w-0">
-            <div
-              className="animate-rise-in inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-3.5 py-1.5 backdrop-blur-md"
-              style={{ animationDelay: "60ms" }}
-            >
-              <span className="live-dot h-1.5 w-1.5 rounded-full bg-emerald-400 text-emerald-400" />
-              <span className="font-mono text-[11px] tracking-wide text-dim">
-                {t.hero.status}
-              </span>
-            </div>
-
             <p
               className="animate-rise-in eyebrow mt-7"
               style={{ animationDelay: "140ms" }}
