@@ -56,6 +56,13 @@ const YouTubeIcon = () => (
   </svg>
 );
 
+const VideoIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
+
 const ExternalLinkIcon = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -103,16 +110,19 @@ const translations = {
       title: "Youssef Magdy",
       subtitle: "Software Engineer & AI Enthusiast",
       resume: "My Resume",
-      description: "Passionate software engineer specializing in AI, Machine Learning, and Full-Stack Development. Currently pursuing my degree at the German International University in Berlin with a GPA of 1.46. I love building intelligent systems that solve real-world problems.",
+      description: "Passionate software engineer specializing in AI, Machine Learning, and Full-Stack Development. Currently pursuing my B.Sc. in Computer Engineering at the German University in Cairo with an Excellent grade (GPA 1.6, German scale). I love building intelligent systems that solve real-world problems.",
       getInTouch: "Get in Touch",
       viewProjects: "View Projects"
     },
     education: {
       title: "Education",
-      university: "German International University in Berlin",
-      faculty: "Faculty of Media Engineering and Technology",
-      graduation: "Expected Graduation: 2026",
-      gpa: "1.46"
+      university: "German University in Cairo",
+      faculty: "B.Sc. Computer Engineering — Faculty of Media Engineering and Technology",
+      graduation: "Aug 2021 – 2026 (Expected Graduation)",
+      gpa: "1.6",
+      grade: "Excellent",
+      usGpa: "3.7",
+      usGrade: "A−"
     },
     youtube: {
       title: "Professional Highlight",
@@ -173,16 +183,19 @@ const translations = {
       title: "Youssef Magdy",
       subtitle: "Software-Ingenieur & KI-Enthusiast",
       resume: "Mein Lebenslauf",
-      description: "Leidenschaftlicher Software-Ingenieur, spezialisiert auf KI, maschinelles Lernen und Full-Stack-Entwicklung. Derzeit studiere ich an der German International University in Berlin mit einem Notendurchschnitt von 1,46. Ich liebe es, intelligente Systeme zu entwickeln, die reale Probleme lösen.",
+      description: "Leidenschaftlicher Software-Ingenieur, spezialisiert auf KI, maschinelles Lernen und Full-Stack-Entwicklung. Derzeit studiere ich Computertechnik (B.Sc.) an der German University in Cairo mit der Note 1,6 (sehr gut, deutsches System). Ich liebe es, intelligente Systeme zu entwickeln, die reale Probleme lösen.",
       getInTouch: "Kontakt aufnehmen",
       viewProjects: "Projekte ansehen"
     },
     education: {
       title: "Bildung",
-      university: "German International University in Berlin",
-      faculty: "Fakultät für Medieningenieurwesen und Technologie",
-      graduation: "Voraussichtlicher Abschluss: 2026",
-      gpa: "1,46"
+      university: "German University in Cairo",
+      faculty: "B.Sc. Computertechnik — Fakultät für Medieningenieurwesen und Technologie",
+      graduation: "Aug. 2021 – 2026 (voraussichtlicher Abschluss)",
+      gpa: "1,6",
+      grade: "Sehr gut",
+      usGpa: "3,7",
+      usGrade: "A−"
     },
     youtube: {
       title: "Professionelles Highlight",
@@ -238,8 +251,34 @@ const technicalSkills = [
   "Test Driven Development (TDD)", "Git & GitHub", "Linux", "Bash", "OOP", "RESTful APIs", "Agile", "SCRUM", "Jira"
 ];
 
-const projects = [
-  
+type Project = {
+  title: string;
+  description: string;
+  tools: string[];
+  github?: string;
+  download?: string;
+  video?: string;
+};
+
+const projects: Project[] = [
+  {
+    title: "Deen Party — Social Party Game App",
+    description: "A cross-platform mobile party game with 15+ real-time multiplayer modes, built in Flutter with Riverpod on top of a Nakama authoritative realtime server running custom Lua RPC modules for leaderboards, entitlements, and chat moderation over WebSocket matches. A Python FastAPI backend on PostgreSQL serves 28,000+ content items alongside a server-authoritative in-app economy, a Gemini-powered AI companion, LiveKit voice rooms, and in-app purchase receipt verification for Google Play and the App Store. Also features on-device face tracking with a quantized YOLO model via TensorFlow Lite for a camera-based Quran recitation game, plus a React + TypeScript admin CMS and an event analytics pipeline with partitioned tables and daily rollups. I authored 80% of a 300+ commit codebase in a two-person team.",
+    tools: ["Flutter", "Dart", "Riverpod", "Nakama", "Lua", "FastAPI", "PostgreSQL", "LiveKit", "Gemini", "TensorFlow Lite", "YOLO", "React", "TypeScript", "Docker"],
+    github: "https://github.com/youssefmmagdy"
+  },
+  {
+    title: "Cloud-Native Web App on AWS",
+    description: "A highly available full-stack CRUD application deployed across multiple EC2 instances in separate Availability Zones behind an Elastic Load Balancer and fronted by CloudFront for low-latency global delivery. DynamoDB stores the dataset while S3 holds versioned image uploads linked to each record, and a Lambda function triggered on item creation resizes images through an SNS/SQS event-driven pipeline. Containerized services run on Amazon EKS, infrastructure is managed with CloudFormation, system health is monitored via CloudWatch, and access is locked down with least-privilege IAM policies and VPC security groups.",
+    tools: ["AWS EC2", "Elastic Load Balancer", "CloudFront", "DynamoDB", "S3", "Lambda", "SNS", "SQS", "EKS", "CloudFormation", "CloudWatch", "IAM", "VPC", "Node.js", "AWS SDK"],
+    video: "https://drive.google.com/file/d/1LGNdAXy2oKZsVQwB--JhhPC10aGgAizA/view?usp=sharing"
+  },
+  {
+    title: "Freelance Marketplace Platform",
+    description: "A two-sided marketplace connecting freelancers with clients, built as five Spring Boot microservices — User, Job, Proposal, Contract, and Payment — each backed by PostgreSQL for transactional data. A polyglot persistence layer adds MongoDB for portfolios and threaded messaging, Neo4j for graph-based skill matching, Elasticsearch for full-text job search with filters, and Redis for caching active listings and sessions. Services communicate over OpenFeign, RabbitMQ, Kafka, and gRPC, applying Saga, Observer, Mediator, and Builder patterns, and the platform runs on Kubernetes with Prometheus and Grafana monitoring. I served as Scrum Master, driving sprint planning and backlog grooming across the team.",
+    tools: ["Spring Boot", "Microservices", "PostgreSQL", "MongoDB", "Neo4j", "Elasticsearch", "Redis", "Kafka", "RabbitMQ", "gRPC", "OpenFeign", "Kubernetes", "Prometheus", "Grafana", "SCRUM"],
+    github: "https://github.com/youssefmmagdy"
+  },
   {
     title: "Face-Recognizer",
     description: "A real-time face recognizer built with YOLOv3-face, capable of recognizing faces from live webcam feeds. May used for Attendance system, or lock systems.",
@@ -816,12 +855,14 @@ export default function Home() {
                   <span className="px-3 sm:px-4 py-2 bg-red-100 text-red-800 rounded-full font-bold text-base sm:text-lg">
                     {t.education.gpa}
                   </span>
+                  <p className="text-xs font-semibold text-red-700 mt-2">{t.education.grade}</p>
                 </div>
                 <div className="text-center sm:text-right">
                   <p className="text-xs text-gray-500 mb-3">US GPA (4.0 scale)</p>
                   <span className="px-3 sm:px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-bold text-base sm:text-lg">
-                    3.60
+                    {t.education.usGpa}
                   </span>
+                  <p className="text-xs font-semibold text-blue-700 mt-2">{t.education.usGrade}</p>
                 </div>
               </div>
             </div>
@@ -917,7 +958,7 @@ export default function Home() {
             {projects.slice(0, showAllProjects ? projects.length : 6).map((project, index) => (
               <a
                 key={index}
-                href={project.github}
+                href={project.github ?? project.video}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="project-card block cursor-pointer"
@@ -925,6 +966,18 @@ export default function Home() {
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900 pr-4">{project.title}</h3>
                   <div className="flex gap-2 sm:gap-3" onClick={(e) => e.stopPropagation()}>
+                    {project.video && (
+                    <a
+                      href={project.video}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-red-600 transition-colors shrink-0"
+                      aria-label="Watch demo video"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <VideoIcon />
+                    </a>
+                    )}
                     {(project.download && 
                     <a
                       href={project.download}
