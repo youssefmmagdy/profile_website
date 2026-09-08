@@ -29,7 +29,7 @@ export const links: Route.LinksFunction = () => [
  * scroll-reveal styles — without it every section renders visible) and applies
  * the stored theme so a returning visitor never sees the wrong palette.
  */
-const THEME_SCRIPT = `(function(){var d=document.documentElement;d.classList.add("js");try{var s=localStorage.getItem("ym-theme");var m=window.matchMedia("(prefers-color-scheme: light)").matches;d.dataset.theme=(s==="light"||s==="dark")?s:(m?"light":"dark");}catch(e){d.dataset.theme="dark";}})();`;
+const THEME_SCRIPT = `(function(){var d=document.documentElement;d.classList.add("js");try{var s=localStorage.getItem("ym-theme");d.dataset.theme=(s==="light"||s==="dark")?s:"dark";}catch(e){d.dataset.theme="dark";}})();`;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

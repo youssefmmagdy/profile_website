@@ -232,7 +232,7 @@ export const PROJECTS: Project[] = [
     ],
     category: "cloud",
     video:
-      "https://drive.google.com/file/d/1LGNdAXy2oKZsVQwB--JhhPC10aGgAizA/view?usp=sharing",
+      "https://lnkd.in/p/eqxn9RJS",
     featured: true,
   },
   {
@@ -257,12 +257,13 @@ export const PROJECTS: Project[] = [
       "SCRUM",
     ],
     category: "cloud",
-    github: "https://github.com/youssefmmagdy",
+    github: "https://github.com/Freelance-acl/01-Freedance-Freelance",
     featured: true,
   },
   {
-    title: "gpt2-124M-parameters",
-    description: `A PyTorch implementation of a GPT-2-style Transformer built from scratch, following the core ideas from the ${ATTENTION_PAPER} paper.`,
+    title: "She3rGPT",
+    description:
+      "A generative language model built from scratch with a decoder-only Transformer in PyTorch, trained on classical Arabic poetry to generate new verses in a similar style. The project also includes educational notebooks covering neural networks, evapotranspiration prediction, self-attention, and autoregressive text generation.",
     tools: [
       "Transformer Architecture",
       "PyTorch",
@@ -272,7 +273,7 @@ export const PROJECTS: Project[] = [
       "Python",
     ],
     category: "ai",
-    github: "https://github.com/youssefmmagdy/gpt2-124M-parameters",
+    github: "https://github.com/youssefmmagdy/she3rgpt",
     featured: true,
   },
   {
