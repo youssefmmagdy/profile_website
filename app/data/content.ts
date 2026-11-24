@@ -13,6 +13,7 @@ export type Project = {
   description: string;
   tools: string[];
   category: ProjectCategory;
+  link?: string;
   github?: string;
   download?: string;
   video?: string;
@@ -206,7 +207,7 @@ export const PROJECTS: Project[] = [
       "Docker",
     ],
     category: "web",
-    github: "https://github.com/youssefmmagdy",
+    link: "https://deenparty.com",
     featured: true,
   },
   {
@@ -236,7 +237,7 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    title: "Freelance Marketplace Platform",
+    title: "Freedance — Freelance Marketplace Platform",
     description:
       "A two-sided marketplace connecting freelancers with clients, built as five Spring Boot microservices — User, Job, Proposal, Contract and Payment — each backed by PostgreSQL for transactional data. A polyglot persistence layer adds MongoDB for portfolios and threaded messaging, Neo4j for graph-based skill matching, Elasticsearch for full-text job search with filters, and Redis for caching active listings and sessions. Services communicate over OpenFeign, RabbitMQ, Kafka and gRPC, applying Saga, Observer, Mediator and Builder patterns, and the platform runs on Kubernetes with Prometheus and Grafana monitoring. I served as Scrum Master, driving sprint planning and backlog grooming across the team.",
     tools: [
@@ -257,6 +258,7 @@ export const PROJECTS: Project[] = [
       "SCRUM",
     ],
     category: "cloud",
+    link: "https://linkedin.com/in/youssefmmagdy",
     github: "https://github.com/Freelance-acl/01-Freedance-Freelance",
     featured: true,
   },
@@ -553,6 +555,7 @@ export type Dictionary = {
     showLess: string;
     count: (shown: number, total: number) => string;
     featured: string;
+    openProject: string;
     viewSource: string;
     download: string;
     watchDemo: string;
@@ -695,6 +698,7 @@ export const translations: Record<Locale, Dictionary> = {
       showLess: "Show fewer",
       count: (shown, total) => `Showing ${shown} of ${total}`,
       featured: "Featured",
+      openProject: "Open project link",
       viewSource: "View source",
       download: "Download build",
       watchDemo: "Watch demo",
@@ -836,6 +840,7 @@ export const translations: Record<Locale, Dictionary> = {
       showLess: "Weniger zeigen",
       count: (shown, total) => `${shown} von ${total} sichtbar`,
       featured: "Highlight",
+      openProject: "Projektlink öffnen",
       viewSource: "Quellcode ansehen",
       download: "Build herunterladen",
       watchDemo: "Demo ansehen",

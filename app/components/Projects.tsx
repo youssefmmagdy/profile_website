@@ -4,6 +4,7 @@ import type { Dictionary, Project, ProjectCategory } from "../data/content";
 import { useReveal, useSpotlight } from "../hooks/usePortfolio";
 import {
   DownloadIcon,
+  ExternalLinkIcon,
   GitHubIcon,
   PlayIcon,
   SearchIcon,
@@ -29,7 +30,7 @@ function ProjectCard({
   index: number;
 }) {
   const ref = useSpotlight<HTMLElement>();
-  const primary = project.github ?? project.video;
+  const primary = project.link ?? project.github ?? project.video;
   const extraTools = project.tools.length - TOOL_LIMIT;
 
   return (
@@ -61,6 +62,18 @@ function ProjectCard({
         </div>
 
         <div className="relative z-10 flex shrink-0 items-center gap-1">
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t.projects.openProject} — ${project.title}`}
+              title={t.projects.openProject}
+              className="icon-btn h-8 w-8"
+            >
+              <ExternalLinkIcon className="h-4 w-4" />
+            </a>
+          )}
           {project.download && (
             <a
               href={project.download}
